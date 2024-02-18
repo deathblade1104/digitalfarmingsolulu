@@ -1,8 +1,7 @@
 import compression from 'compression';
-import express, { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
+import { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
 import http from 'http';
 import HTTP_STATUS from 'http-status-codes';
-import path from 'path';
 import CustomError from './core/errors/abstractClasses/CustomError';
 import IErrorResponse from './core/errors/interfaces/IErrorResponse.interface';
 import utils from './core/utils/index';
@@ -24,11 +23,6 @@ class BackendServer {
     app.use(urlencoded({ extended: true, limit: '50mb' }));
   }
 
-  private setViews(app: Application): void {
-    app.set('view engine', 'ejs');
-    app.set('views', path.join(__dirname, 'src','views'));
-    app.use('/static', express.static(path.join(__dirname, 'src','static')));
-  }
 
   private routesMiddleware(app: Application): void {
     appRoutes(app);
