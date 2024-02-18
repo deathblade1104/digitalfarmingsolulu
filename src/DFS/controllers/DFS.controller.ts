@@ -52,12 +52,15 @@ class Controllers {
 
   }
 
+  healthCheck(req: Request, res : Response){
+  res.status(200).json({message : "Service is up"});
+  }
 
   public init(app: Application): void {
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
     app.use('/static', express.static(path.join(__dirname, 'static')));
-
+    app.get('/api',this.healthCheck);
     app.get('/', this.getLandingPage);
     app.get('/landing_page', this.getLandingPage);
     app.get('/home', this.getHomePage);
